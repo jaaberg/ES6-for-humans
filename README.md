@@ -135,14 +135,16 @@ function Person() {
 }
 ```
 
-As mentioned above, Arrow functions capture the this value of the enclosing context, so the following code works as expected.
+As mentioned above, Arrow functions capture the this value of the enclosing context, so the following code works as expected, even with nested arrow functions.
 
 ```javascript
 function Person() {
     this.age = 0;
 
     setInterval(() => {
-        this.age++; // `this` properly refers to the person object
+        setTimeout(() => {
+            this.age++; // `this` properly refers to the person object
+        }, 1000);
     }, 1000);
 }
 
